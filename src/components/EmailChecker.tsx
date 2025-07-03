@@ -5,10 +5,11 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { Message } from "primereact/message";
+import Breach from "@/types/Breach";
 
 const EmailChecker: React.FC = () => {
     const [email, setEmail] = useState("");
-    const [breaches, setBreaches] = useState<any[] | null>(null);
+    const [breaches, setBreaches] = useState<Breach[] | null>(null);
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState<string | null>(null);
 
@@ -85,7 +86,7 @@ const EmailChecker: React.FC = () => {
                                     text={`糟糕！此電子信箱出現在 ${breaches.length} 次資料外洩事件中。`}
                                 />
                                 <ul className="list-none p-0 m-0 mt-4">
-                                    {breaches.map((breach: any) => (
+                                    {breaches.map((breach: Breach) => (
                                         <li
                                             key={breach.Name}
                                             className="p-2 border-bottom-1 border-gray-700"

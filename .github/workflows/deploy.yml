@@ -23,8 +23,8 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build Angular
-        run: npm run build -- --configuration production
+      - name: Build Frontend
+        run: npm run build
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2

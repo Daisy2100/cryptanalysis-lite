@@ -7,12 +7,12 @@ import { ProgressBar } from "primereact/progressbar";
 import { Message } from "primereact/message";
 import { Card } from "primereact/card";
 import CryptoJS from "crypto-js";
-import zxcvbn from "zxcvbn";
+import zxcvbn, { ZXCVBNResult } from "zxcvbn";
 
 const PasswordChecker: React.FC = () => {
     const [password, setPassword] = useState("");
     const [pwnedCount, setPwnedCount] = useState<number | null>(null);
-    const [strength, setStrength] = useState<any>(null);
+    const [strength, setStrength] = useState<ZXCVBNResult | null>(null);
     const [history, setHistory] = useState<string[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
