@@ -1,4 +1,4 @@
-name: Deploy Next.js and Manage Firewall
+name: Deploy Next.js to GCP
 
 on:
   push:
@@ -25,11 +25,6 @@ jobs:
 
       - name: Build Frontend
         run: npm run build
-
-      - name: Copy static assets to standalone directory
-        run: |
-          cp -r public .next/standalone/public
-          cp -r .next/static .next/standalone/.next/static
 
       - name: Authenticate to GCP
         uses: google-github-actions/auth@v2
@@ -58,7 +53,7 @@ jobs:
           ssh -vvv -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa daisy@${{ secrets.GCP_VM_IP }} "echo SSH OK" || exit 1
 
           # 傳檔案
-          scp -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa -r .next/standalone/* daisy@${{ secrets.GCP_VM_IP }}:${{ secrets.GCP_VM_PATH }} || exit 1
+          scp -v -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -i ~/.ssh/id_rsa -r out/* daisy@${{ secrets.GCP_VM_IP }}:${{ secrets.GCP_VM_PATH }} || exit 1
 
       - name: Disable Firewall Rule
         if: always()
